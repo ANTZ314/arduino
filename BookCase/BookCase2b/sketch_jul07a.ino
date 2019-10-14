@@ -1,0 +1,74 @@
+/*
+ Based on Open Source LED Fade Sketch
+ Added button debounce and latching functions
+ Written for Arduino Micro [9, 6,  5, 4 & switch 10]
+ Written for Arduino Uno   [9, 10, 11,  & switch ]..?
+ */
+int switchPin = 10;     // switch is connected to pin 2
+int led1 = 9;           // First PWM pin
+int led2 = 6;           // Second PWM pin
+int led3 = 5;           // Third PWM pin
+int led4 = 4;           // Hidden
+
+int brightness = 0;    // how bright the LED is
+int fadeAmount = 5;    // how many points to fade the LED by
+
+int btn;               // variable for reading the pin status
+int btn2;              // variable for reading the delayed status
+int buttonState;       // variable to hold the button state
+int mode;              // 2 state function modes
+
+// the setup routine runs once when you press reset:
+void setup() {
+  pinMode(switchPin, INPUT);              // Set the switch pin as input
+  pinMode(led1, OUTPUT);                  // declare pin 9 & 10 to be outputs:
+  pinMode(led2, OUTPUT);                  // declare pin 9 & 10 to be outputs:
+  pinMode(led3, OUTPUT);                  // declare pin 11 to be an output:
+  pinMode(led4, OUTPUT);                  // declare pin 11 to be an output:
+  buttonState = digitalRead(switchPin);   // read the initial state
+}
+
+// Continuous:
+void loop() {
+  btn = digitalRead(switchPin);       // read input value and store it in val
+  delay(50);                          // 50 msec debounce
+  btn2 = digitalRead(switchPin);      // read the input again to check for bounces
+  /* BUTTON LATCHING */
+  if(btn == btn2){
+      /* FADING FUNCTION */
+      if(btn == 0){
+        digitalWrite(led4, LOW);
+        // set the brightness of pin 9:
+        analogWrite(led1, brightness);
+        analogWrite(led2, brightness);    
+        analogWrite(led3, brightness);
+      
+        // change the brightness for next time through the loop:
+        brightness = brightness + fadeAmount;
+      
+        // reverse the direction of the fading at the ends of the fade:
+        if (brightness <= 0 || brightness >= 255) {
+          fadeAmount = -fadeAmount;
+        }
+        // wait for 30 milliseconds to see the dimming effect
+        delay(30);
+      }
+      /* BLINK FUNCTION - REPLACE WITH RFID */
+      else if(btn == 1){
+        digitalWrite(led1, HIGH);
+        delay(300);
+        digitalWrite(led1, LOW);
+        delay(300);
+        digitalWrite(led2, HIGH);
+        delay(300);
+        digitalWrite(led2, LOW);
+        delay(300);
+        digitalWrite(led3, HIGH);
+        delay(300);
+        digitalWrite(led3, LOW);
+        delay(300);
+        digitalWrite(led4, HIGH);
+      }
+  }
+}
+
