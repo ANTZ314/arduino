@@ -17,12 +17,12 @@ const int MTCK = 13;
 SSD1306  display(0x3c, 0, 4);     // Monichron Board
  
 void setup() {
-  pinMode (MTCK, OUTPUT);
+  pinMode (MTCK, OUTPUT);                   // GPIO LED
   display.init();
   display.setFont(ArialMT_Plain_10);
   display.drawString(10, 5, "HEART RATE:");
   display.setFont(ArialMT_Plain_16);
-  display.drawString(20, 20, "86 BPM");
+  display.drawString(20, 20, "95 BPM");
   display.display();
 }
  

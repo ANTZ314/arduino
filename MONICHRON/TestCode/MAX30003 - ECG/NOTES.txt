@@ -1,0 +1,27 @@
+-----------------------------
+	MAX30003 - ECG:
+-----------------------------
+
+SPI EXPLAINED:
+https://arduino.stackexchange.com/questions/16348/how-do-you-use-spi-on-an-arduino
+
+
+GITHUB full project:
+https://github.com/Protocentral/protocentral_max30003
+
+
+Single-lead ECG:
+https://www.hackster.io/protocentral/single-lead-ecg-heartrate-variability-using-max30003-d20057
+
+
+Single-lead ECG:
+https://create.arduino.cc/projecthub/protocentral/single-lead-ecg-heartrate-variability-using-max30003-d20057
+
+
+PROTOCENTRAL MAX30003 SINGLE-LEAD ECG BREAKOUT - with code:
+https://www.protocentral.com/open-source-health/1149-protocentral-max30003-single-lead-ecg-breakout-board.html
+https://www.protocentral.com/open-source-health/1290-protocentral-max30003-single-lead-ecg-breakout-board-v2.html
+
+
+SPI Communication With MAX30003 ECG:
+https://devzone.nordicsemi.com/f/nordic-q-a/39063/spi-communication-with-max30003-ecg-reg_read_write
