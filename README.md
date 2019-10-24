@@ -2,7 +2,7 @@
 # ARDUINO README:
 -----------------
 
-####Libraries:
+#### Libraries:
 * ESP8266 and ESP32 Oled Driver for SSD1306 display
 * ESP32
 * Blynk
@@ -24,7 +24,7 @@ Check the port in Tools & Get USB permissions in Linux:
 /home/antz/Arduino/libraries/Adafruit_SSD1306/Adafruit_SSD1306.h
 Comment other sizes - line 97 - 110
 
-###Project List:
+### Project List:
 
 * **blinktest** - Blink 4 LED's consecutively (UNO?)
 
