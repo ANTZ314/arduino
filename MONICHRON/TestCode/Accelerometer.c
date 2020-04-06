@@ -18,18 +18,19 @@ SSD1306  display(0x3c, 0, 4);     // Monichron Board
  
 void setup() {
   pinMode (MTCK, OUTPUT);                   // GPIO LED
+
   display.init();
   display.setFont(ArialMT_Plain_10);
-  display.drawString(10, 5, "HEART RATE:");
+  display.drawString(10, 5, "ACCELEROMETER");
   display.setFont(ArialMT_Plain_16);
-  display.drawString(20, 20, "86 BPM");
+  display.drawString(20, 20, "TEST 2");
   display.display();
 }
  
 void loop() 
 {
-  digitalWrite (MTCK, HIGH);    // turn on the LED
-  delay(1000);                  // wait 500ms
-  digitalWrite (MTCK, LOW);     // turn on the LED
-  delay(500);                   // wait 500ms
+  digitalWrite (MTCK, HIGH);              // turn on the LED
+  delay(1000);                            // wait 500ms
+  digitalWrite (MTCK, LOW);               // turn on the LED
+  delay(500);                             // wait 500ms
 }

@@ -1,5 +1,14 @@
 # ESP32 WiFi Module:
 
+**INstall ESP32:**
+
+* File -> Preferences -> Additional Board Manager URLs
+	https://dl.espressif.com/dl/package_esp32_index.json
+* Tools -> Board -> Boards Manager
+* search "ESP32" -> (ESP32 by Espressif Systems) -> Install
+
+
+
 ### Project Folders:
 
 * **ESP32_ADC** - Test the ADC input of the ESP32

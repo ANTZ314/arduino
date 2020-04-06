@@ -1,63 +1,53 @@
-// Distributed with a free-will license.
-// Use it any way you want, profit or free, provided it fits in the licenses of its associated works.
-// SI7050
-// This code is designed to work with the SI7050_I2CS I2C Mini Module available from ControlEverything.com.
-// https://www.controleverything.com/content/Temperature?sku=SI7050_I2CS#tabs-0-product_tabset-2
-
+/* 
+ *  OLED [32x64]??
+ *  ESP32 - I2C - OLED-SSD1306
+ *  SDA - D21 - D0 (pin23)
+ *  SCL - D22 - D4 (pin24)
+ *  
+ *  display.setFont(ArialMT_Plain_10);  <- 10, 16, 24
+ *  display.drawString(x, y1, "STRING1");
+ *  display.drawString(x, y2, "STRING2");
+ *  display.display();
+ */
 #include <Wire.h>
+#include "SSD1306.h" 
 
-// SI7050 I2C address is 0x40(64)
-#define Addr 0x40
+//Analog Input
+#define ANALOG_PIN_0 36                     // GPIO 36 => ADC1_CH0
+int analog_value = 0;
 
-void setup()
-{
-  // Initialise I2C communication as MASTER
-  Wire.begin();
-  // Initialise serial communication, set baud rate = 9600
-  Serial.begin(9600);
-
-  // Start I2C transmission
-  Wire.beginTransmission(Addr);
-  // Stop I2C transmission
-  Wire.endTransmission();
-  delay(300);
-}
-
-void loop()
-{
-    unsigned int data[2];
+const int MTCK = 13;                        // GPIO LED
+//SSD1306  display(0x3c, 21, 22);           // ESP32-Dev-Kit
+SSD1306  display(0x3c, 0, 4);               // Monichron Board
+ 
+void setup() {
+  Serial.begin(115200);
+  delay(1000);                              // Time to bring up serial monitor
+  Serial.println("ESP32 Analog IN Test");
   
-    // Start I2C transmission
-    Wire.beginTransmission(Addr);
-    // Send temperature measurement command, NO HOLD MASTER
-    Wire.write(0xF3);
-    // Stop I2C transmission
-    Wire.endTransmission();
-    delay(500);
-    
-    // Request 2 bytes of data
-    Wire.requestFrom(Addr, 2);
-
-    // Read 2 bytes of data
-    // temp msb, temp lsb
-    if(Wire.available() == 2)
-    {
-      data[0] = Wire.read();
-      data[1] = Wire.read();
-    }
-
-    // Convert the data
-    float temp  = ((data[0] * 256.0) + data[1]);
-    float ctemp = ((175.72 * temp) / 65536.0) - 46.85;
-    float ftemp = ctemp * 1.8 + 32;
+  pinMode (MTCK, OUTPUT);                   // Initialise GPIO LED
   
-    // Output data to serial monitor
-    Serial.print("Temperature in Celsius : ");
-    Serial.print(ctemp);
-    Serial.println(" C");
-    Serial.print("Temperature in Fahrenheit : ");
-    Serial.print(ftemp);
-    Serial.println(" F");
-    delay(500);
+  /* Initialise OLED * /
+  display.init();
+  display.setFont(ArialMT_Plain_10);
+  display.drawString(10, 5, "TEMPERATURE");
+  display.setFont(ArialMT_Plain_16);
+  display.drawString(20, 20, "TEST 1");
+  display.display();
+  */
 }
+ 
+void loop() 
+{
+  /* Read Analog value & print to serial monitor */
+  
+  //int sensorValue = analogRead(A0);       // read input analog ADC1_0
+  analog_value = analogRead(ANALOG_PIN_0);  // read input analog ADC1_0
+  Serial.println(analog_value);             // print
 
+  /* Blink LED as delay */
+  digitalWrite (MTCK, HIGH);                // turn on the LED
+  delay(500);                               // wait 1sec
+  digitalWrite (MTCK, LOW);                 // turn on the LED
+  delay(500);                               // wait 500ms
+}

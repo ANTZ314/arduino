@@ -13,10 +13,10 @@ const int LED_BUILTIN = 2;
 
 void loop() 
 {
-  digitalWrite (LED_BUILTIN, HIGH);  // turn on the LED
-  digitalWrite (ledPin, HIGH);  // turn on the LED
+  digitalWrite (LED_BUILTIN, HIGH);   // turn on the LED
+  digitalWrite (ledPin, HIGH);        // turn on the LED
   delay(500);  // wait for half a second or 500 milliseconds
-  digitalWrite (LED_BUILTIN, LOW);  // turn off the LED
+  digitalWrite (LED_BUILTIN, LOW);    // turn off the LED
   digitalWrite (ledPin, LOW);  // turn off the LED
   delay(100);  // wait for half a second or 500 milliseconds
 }
